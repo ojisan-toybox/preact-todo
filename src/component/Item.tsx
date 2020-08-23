@@ -1,4 +1,5 @@
 import { h } from "preact";
+import { styled } from "goober";
 import { TodoType } from "../type";
 
 interface IProps {
@@ -8,8 +9,16 @@ interface IProps {
 
 export const Item: React.FC<IProps> = (props) => {
   return (
-    <div className={props.className}>
-      <p>{props.data.todo}</p>
-    </div>
+    <Wrapper className={props.className}>
+      <Text>{props.data.todo}</Text>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled("div")`
+  padding: 12px;
+`;
+
+const Text = styled("p")`
+  font-size: 1.6rem;
+`;

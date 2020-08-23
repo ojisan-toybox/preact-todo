@@ -1,7 +1,7 @@
 import { h, render, } from "preact";
 import { useReducer } from "preact/compat";
 import { Router, Route } from "preact-router";
-import { setup } from "goober";
+import { setup, glob } from "goober";
 import reducer, {
     initialState,
 } from "./reducer/TodoReducer";
@@ -10,6 +10,24 @@ import { Todos } from "./pages/Todos";
 import { Detail } from "./pages/Detail";
 
 setup(h);
+
+glob`
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+}
+`;
 
 const Main = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
