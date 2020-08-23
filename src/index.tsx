@@ -5,7 +5,7 @@ import { setup, glob } from "goober";
 import reducer, {
     initialState,
 } from "./reducer/TodoReducer";
-import { TodoContext } from "./context/TodoCotext";
+import { TodoStateContext, TodoDispatchContext } from "./context/TodoCotext";
 import { Todos } from "./pages/Todos";
 import { Detail } from "./pages/Detail";
 
@@ -33,12 +33,14 @@ const Main = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
-        <TodoContext.Provider value={{ state, dispatch }}>
-            <Router>
-                <Route path="/" component={Todos}></Route>
-                <Route path="/todos/:id" component={Detail}></Route>
-            </Router>
-        </TodoContext.Provider>
+        <TodoStateContext.Provider value={{ state, }}>
+            <TodoDispatchContext.Provider value={{ dispatch }}>
+                <Router>
+                    <Route path="/" component={Todos}></Route>
+                    <Route path="/todos/:id" component={Detail}></Route>
+                </Router>
+            </TodoDispatchContext.Provider>
+        </TodoStateContext.Provider>
     );
 };
 

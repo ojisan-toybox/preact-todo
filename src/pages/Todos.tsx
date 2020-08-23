@@ -2,14 +2,16 @@ import { h } from "preact";
 import { useContext } from "preact/hooks";
 import { Link } from "preact-router";
 import { styled } from "goober";
-import { TodoContext } from "../context/TodoCotext";
+import { TodoStateContext, TodoDispatchContext } from "../context/TodoCotext";
 import { actions } from "../reducer/TodoReducer";
 import { genRandomId } from "../helper";
 import { Item as _Item } from "../component/Item";
 
 export const Todos = () => {
-  const context = useContext(TodoContext);
-  const { state, dispatch } = context;
+  const todoStateContext = useContext(TodoStateContext);
+  const todoDispatchContext = useContext(TodoDispatchContext);
+  const { state } = todoStateContext;
+  const { dispatch } = todoDispatchContext;
   return (
     <Layout>
       <Title>TODO LIST</Title>

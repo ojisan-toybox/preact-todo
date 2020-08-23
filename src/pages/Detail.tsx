@@ -1,10 +1,10 @@
 import { h } from "preact";
 import { styled } from "goober";
 import { useContext } from "preact/hooks";
-import { TodoContext } from "../context/TodoCotext";
+import { TodoStateContext } from "../context/TodoCotext";
 
 export const Detail = () => {
-  const context = useContext(TodoContext);
+  const context = useContext(TodoStateContext);
   const { state } = context;
   return <Layout>{state.selectedTodo?.todo}</Layout>;
 };
