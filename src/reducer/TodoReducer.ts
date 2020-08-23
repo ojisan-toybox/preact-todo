@@ -31,10 +31,10 @@ export const initialState: StoreType = {
     todos: []
 }
 
-export default (state: StoreType, action: ActionType) => {
+export default (state: StoreType, action: ActionType): StoreType => {
     switch (action.type) {
         case 'SELECT_TODO':
-            return { ...state, selectedMovie: action.payload }
+            return { ...state, selectedTodo: action.payload }
         case 'SAVE_TODO':
             return { ...state, todos: [...state.todos, action.payload] }
         default:

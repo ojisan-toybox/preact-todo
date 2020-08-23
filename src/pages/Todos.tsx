@@ -3,11 +3,15 @@ import { useContext } from 'preact/hooks'
 import { TodoContext } from '../context/TodoCotext';
 import { actions } from '../reducer/TodoReducer';
 import { genRandomId } from '../helper';
+import { Item } from '../component/Item';
+import { Link } from 'preact-router';
 
 export const Todos = () => {
     const context = useContext(TodoContext)
     const { state, dispatch } = context
-    return <div>{state.todos.map(todo => <div>{todo.id}{todo.todo}</div>)}
+    return <div>{state.todos.map(todo => <Link href={`/todos/${todo.id}`} onClick={() => {
+        dispatch(actions.selectTodo(todo))
+    }}><Item data={todo} key={todo.id}></Item></Link>)}
         <form onSubmit={e => {
             e.preventDefault()
             try {
