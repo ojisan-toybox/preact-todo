@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { useContext } from "preact/hooks";
+import { useContext, useMemo } from "preact/hooks";
 import { Link } from "preact-router";
 import { styled } from "goober";
 import { TodoContext } from "../context/TodoCotext";
@@ -8,42 +8,44 @@ import { genRandomId } from "../helper";
 import { Item as _Item } from "../component/Item";
 
 export const Todos = () => {
-  const context = useContext(TodoContext);
-  const { state, dispatch } = context;
-  return (
-    <Layout>
-      <Title>TODO LIST</Title>
-      <Items>
-        {state.todos.map((todo) => (
-          <Link
-            href={`/todos/${todo.id}`}
-            onClick={() => {
-              dispatch(actions.selectTodo(todo));
-            }}
-          >
-            <Item data={todo} key={todo.id}></Item>
-          </Link>
-        ))}
-      </Items>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          try {
-            // @ts-ignore
-            const todo = e.target.todo.value as string;
-            const id = genRandomId();
-            dispatch(actions.saveTodo({ id, todo }));
-          } catch (e) {
-            console.error(e);
-            alert("入力の保存に失敗しました。");
-          }
-        }}
-      >
-        <Input name="todo"></Input>
-        <button>submit</button>
-      </form>
-    </Layout>
-  );
+    const context = useContext(TodoContext);
+    const { state, dispatch } = context;
+    return useMemo(() => {
+        // The rest of your rendering logic
+        return <Layout>
+            <Title>TODO LIST</Title>
+            <Items>
+                {state.todos.map((todo) => (
+                    <Link
+                        href={`/todos/${todo.id}`}
+                        onClick={() => {
+                            dispatch(actions.selectTodo(todo));
+                        }}
+                    >
+                        <Item data={todo} key={todo.id}></Item>
+                    </Link>
+                ))}
+            </Items>
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    try {
+                        // @ts-ignore
+                        const todo = e.target.todo.value as string;
+                        const id = genRandomId();
+                        dispatch(actions.saveTodo({ id, todo }));
+                    } catch (e) {
+                        console.error(e);
+                        alert("入力の保存に失敗しました。");
+                    }
+                }}
+            >
+                <Input name="todo"></Input>
+                <button>submit</button>
+            </form>
+        </Layout>;
+    }, [state])
+
 };
 
 const Layout = styled("div")`
@@ -78,3 +80,23 @@ const Item = styled(_Item)`
     margin: 12px 0px;
   }
 `;
+
+const MeomoizedForm = ({ dispatch }) => {
+    <form
+        onSubmit={(e) => {
+            e.preventDefault();
+            try {
+                // @ts-ignore
+                const todo = e.target.todo.value as string;
+                const id = genRandomId();
+                dispatch(actions.saveTodo({ id, todo }));
+            } catch (e) {
+                console.error(e);
+                alert("入力の保存に失敗しました。");
+            }
+        }}
+    >
+        <Input name="todo"></Input>
+        <button>submit</button>
+    </form>
+}
