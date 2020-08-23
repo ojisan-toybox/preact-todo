@@ -1,0 +1,32 @@
+{
+  "name": "preact-todo",
+  "version": "1.0.0",
+  "description": "TODO APP BY PREACT",
+  "main": "dist/index.html",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ojisan-toybox/preact-todo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ojisan-toybox/preact-todo/issues"
+  },
+  "homepage": "https://github.com/ojisan-toybox/preact-todo#readme",
+  "dependencies": {
+    "preact": "^10.4.7",
+    "preact-router": "^3.2.1"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^4.3.0",
+    "ts-loader": "^8.0.2",
+    "typescript": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
