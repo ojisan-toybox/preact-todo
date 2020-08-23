@@ -8,6 +8,7 @@ interface IProps {
 }
 
 export const Item: React.FC<IProps> = (props) => {
+  console.log(props.data.id);
   return (
     <Wrapper className={props.className}>
       <Text>{props.data.todo}</Text>
