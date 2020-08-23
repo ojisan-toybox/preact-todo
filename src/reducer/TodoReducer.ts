@@ -12,7 +12,7 @@ const actionTypes = {
 // action
 
 const selectTodo = (todo: TodoType) => ({ type: actionTypes.SELECT_TODO, payload: todo })
-const saveTodo = (todo: TodoType) => ({ type: actionTypes.SAVE_TODO, })
+const saveTodo = (todo: TodoType) => ({ type: actionTypes.SAVE_TODO, payload: todo })
 
 export const actions = {
     selectTodo, saveTodo
@@ -35,6 +35,8 @@ export default (state: StoreType, action: ActionType) => {
     switch (action.type) {
         case 'SELECT_TODO':
             return { ...state, selectedMovie: action.payload }
+        case 'SAVE_TODO':
+            return { ...state, todos: [...state.todos, action.payload] }
         default:
             throw new Error('unexpected action type')
     }
