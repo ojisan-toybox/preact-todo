@@ -1,9 +1,9 @@
 import { h, render, } from "preact";
-import { useReducer } from "preact/compat";
+import { useReducer } from "preact/hooks";
 import { Router, Route } from "preact-router";
 import { setup, glob } from "goober";
 import reducer, {
-    initialState,
+  initialState,
 } from "./reducer/TodoReducer";
 import { TodoStateContext, TodoDispatchContext } from "./context/TodoCotext";
 import { Todos } from "./pages/Todos";
@@ -30,18 +30,18 @@ body {
 `;
 
 const Main = () => {
-    const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-    return (
-        <TodoStateContext.Provider value={{ state, }}>
-            <TodoDispatchContext.Provider value={{ dispatch }}>
-                <Router>
-                    <Route path="/" component={Todos}></Route>
-                    <Route path="/todos/:id" component={Detail}></Route>
-                </Router>
-            </TodoDispatchContext.Provider>
-        </TodoStateContext.Provider>
-    );
+  return (
+    <TodoStateContext.Provider value={{ state, }}>
+      <TodoDispatchContext.Provider value={{ dispatch }}>
+        <Router>
+          <Route path="/" component={Todos}></Route>
+          <Route path="/todos/:id" component={Detail}></Route>
+        </Router>
+      </TodoDispatchContext.Provider>
+    </TodoStateContext.Provider>
+  );
 };
 
 render(<Main></Main>, document.body);
